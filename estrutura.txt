@@ -1,0 +1,22 @@
+O projeto está dividido em várias pastas e arquivos
+
+ 
+
+Frontend (React)
+- `src/components`: Componentes reutilizáveis
+- `src/pages`: Páginas completas da aplicação
+- `public`: Recursos estáticos (CSS e JS)
+- `views`: Templates EJS para páginas HTML
+
+
+Backend (Node.js/Express)
+- `server.js`: Ponto de entrada da aplicação
+- `config/database.js`: Configurações do banco de dados
+- `controllers`: Lógica de negócios
+- `models`: Definições de modelos
+- `services`: Serviços para comunicação com APIs
+- `utils`: Utilitários e funções auxiliares
+- `routes`: Definição das rotas
+
+Outras Pastas
+- `package.json`: Dependências e scripts do projeto
