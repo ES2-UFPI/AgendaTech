@@ -12,11 +12,11 @@ Frontend (React)
 Backend (Node.js/Express)
 - `server.js`: Ponto de entrada da aplicação
 - `config/database.js`: Configurações do banco de dados
-- `controllers`: Lógica de negócios
-- `models`: Definições de modelos
-- `services`: Serviços para comunicação com APIs
-- `utils`: Utilitários e funções auxiliares
-- `routes`: Definição das rotas
+- `src/controllers`: Lógica de negócios
+- `src/models`: Definições de modelos
+- `src/services`: Serviços para comunicação com APIs
+- `src/utils`: Utilitários e funções auxiliares
+- `src/routes`: Definição das rotas
 
 Outras Pastas
 - `package.json`: Dependências e scripts do projeto
