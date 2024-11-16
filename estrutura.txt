@@ -1,11 +1,19 @@
 Frontend (React + JavaScript)
 
 src/: Contém o código-fonte principal.
-components/: Arquivos dos componentes React.
-hooks/: Funções personalizadas do React.
-services/: Arquivos de serviços para comunicação com o backend.
-utils/: Funções utilitárias.
-App.js: Arquivo principal da aplicação.
+src/components/: Arquivos dos componentes React.
+src/hooks/: Funções personalizadas do React.
+src/services/: Arquivos de serviços para comunicação com o backend.
+src/utils/: Funções utilitárias.
+
+src/visualizacaoDeEventos/: Componentes de visualização de eventos 
+    CalendarioEventos.js:  principal para exibir o calendário de eventos.
+    ListaEventos.js: Componente para listar os próximos eventos.
+    DetalhesEvento.js: Componente para exibir detalhes de um evento específico.
+    FiltroEventos.js: Componente para filtrar eventos por tipo (online/presencial).
+    index.js: Arquivo de exportação para os componentes acima.
+
+src/app.js: Arquivo principal da aplicação.
 public/: Ativos estáticos como index.html, favicon, etc.
 package.json: Dependências e scripts do projeto frontend.
 README.md: Documentação para a parte frontend.
