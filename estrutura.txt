@@ -1,0 +1,27 @@
+Frontend (React + JavaScript)
+
+src/: Contém o código-fonte principal.
+components/: Arquivos dos componentes React.
+hooks/: Funções personalizadas do React.
+services/: Arquivos de serviços para comunicação com o backend.
+utils/: Funções utilitárias.
+App.js: Arquivo principal da aplicação.
+public/: Ativos estáticos como index.html, favicon, etc.
+package.json: Dependências e scripts do projeto frontend.
+README.md: Documentação para a parte frontend.
+
+
+
+
+
+Backend (Python)
+
+
+src/: Contém o código principal do backend.
+routes/: Definições de rotas.
+controllers/: Lógica dos controladores.
+models/: Modelos do banco de dados.
+config.py: Configurações do sistema.
+app.py: Arquivo principal da aplicação Flask.
+requirements.txt: Lista de dependências do Python.
+README.md: Documentação para a parte backend.
