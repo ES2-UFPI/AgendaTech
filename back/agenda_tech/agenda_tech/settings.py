@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+import os
 
 # Application definition
 
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'agenda_tech.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,6 +118,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# Diretório adicional para procurar arquivos estáticos
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+# Diretório para coletar os arquivos estáticos quando rodar collectstatic (em produção)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
