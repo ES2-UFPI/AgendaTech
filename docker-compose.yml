@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      LANG: C.UTF-8
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+  
+  backend:
+    build: ./back
+    working_dir: /back
+    volumes:
+      - ./back:/back
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: >
+      sh -c "
+        until nc -z db 3306; do
+          sleep 1;
+        done;
+        python manage.py runserver 0.0.0.0:8000;
+      "
+    restart: always
+
+  frontend:
+    build: ./front
+    working_dir: /front
+    volumes:
+      - ./front:/front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    command: > 
+      sh -c "
+      until nc -z backend 8000; do
+        sleep 1;
+      done;
+      npm start
+      "
+    restart: always
+
+volumes:
+  db_data:

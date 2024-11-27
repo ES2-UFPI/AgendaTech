@@ -1,0 +1,852 @@
+/* Estilos Gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.user-card-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.user-card-header h2 {
+    font-size: 24px;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.user-card-info {
+    display: none;
+    margin-top: 10px;
+}
+
+.user-card-header.collapsed h2 {
+    font-size: 24px;
+}
+
+.user-card-header.collapsed .user-card-info {
+    display: block;
+}
+
+.user-card-header button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0073e6;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+}
+
+.user-card-header button:hover {
+    background-color: #005bb5;
+}
+
+/* Estilos do Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+/* Alterando a cor do card/modal */
+.modal-content {
+    background-color: #f7c3f7;
+    /* Cor de fundo modificada para rosa claro */
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+/* Botão dentro do modal */
+.modal button {
+    padding: 10px 20px;
+    background-color: #ff6f61;
+    /* Cor de fundo alterada para um tom de laranja */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal button:hover {
+    background-color: #e04a38;
+    /* Cor de fundo do botão quando estiver sobre o cursor */
+}
+
+/* Layout da Página */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilos dos Cards */
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 80%;
+    max-width: 200px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.card a {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.card a:hover {
+    color: #005bb5;
+}
+
+.subscribe-button {
+    width: 100px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Estilos para o Chat */
+.chat-container {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    /* Adiciona um espaço maior abaixo do chat */
+}
+
+.chat-container h2 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.chat-box {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f4f6f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message strong {
+    color: #0073e6;
+}
+
+.message p {
+    color: #555;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.rating {
+    font-size: 16px;
+    color: gold;
+}
+
+.chat-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat-input input {
+    width: 80%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #005bb5;
+
+}
+
+/* Links dentro do chat (comentários) */
+.message a {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.message a:hover {
+    color: #005bb5;
+}
+
+/* Seção de Certificados */
+.certificates-container {
+    display: none;
+    /* Esconde a seção por padrão */
+    margin-top: 40px;
+    width: 90%;
+    max-width: 1000px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.certificates-container h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.certificate {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.certificate h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #0073e6;
+}
+
+.certificate p {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0073e6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.download-button:hover {
+    background-color: #005bb5;
+}
+
+
+
+
+/* Estilos gerais para a barra de navegação */
+.navbar {
+    width: 100%;
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Alinhamento da barra de navegação à esquerda (ícone de agenda) */
+.navbar-left img {
+    width: 75px;
+    height: auto;
+    cursor: pointer;
+}
+
+/* Alinhamento da barra de navegação ao centro (links) */
+.navbar-center {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navbar-center a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar-center a:hover {
+    color: #f39c12;
+}
+
+/* Alinhamento da barra de navegação à direita (ícone de usuário) */
+.navbar-right img {
+    width: 40px;
+    height: auto;
+    cursor: pointer;
+}
+
+/* Estilos do modal de login */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.modal button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal button:hover {
+    background-color: #005bb5;
+}
+
+.modal p {
+    text-align: center;
+}
+
+.modal a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+.modal a:hover {
+    color: #005bb5;
+}
+
+/* Estilos do Modal */
+.modal {
+    display: none;
+    /* Inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo semi-transparente */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.certificate {
+    margin-bottom: 20px;
+}
+
+.download-button {
+    display: inline-block;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.download-button:hover {
+    background-color: #45a049;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e53935;
+}
+
+/* Estilos para os eventos dentro do modal */
+.event {
+    margin-bottom: 20px;
+}
+
+.view-details-button {
+    display: inline-block;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.view-details-button:hover {
+    background-color: #45a049;
+}
+
+// Função para exibir o modal de Perfil
+function showProfile() {
+    const profileModal=document.getElementById('profile-modal');
+    profileModal.style.display='flex'; // Exibe o modal no centro da tela
+}
+
+// Função para fechar o modal de Perfil
+function closeProfileModal(event) {
+    if (event.target===document.getElementById('profile-modal') || event.target.tagName==='BUTTON') {
+        document.getElementById('profile-modal').style.display='none';
+    }
+}
+
+/* Estilos para o modal de perfil */
+.profile-info p {
+    margin: 10px 0;
+}
+
+.profile-info a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.profile-info a:hover {
+    text-decoration: underline;
+}
+
+.profile-image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos gerais para o modal de configurações */
+.setting-item {
+    margin-bottom: 20px;
+}
+
+.setting-item h3 {
+    margin-bottom: 5px;
+}
+
+.setting-item label {
+    display: block;
+    margin: 5px 0;
+}
+
+.setting-item input,
+.setting-item select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para a área de mensagens */
+.message {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f4f6f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para o cabeçalho da mensagem (nome + horário) */
+.message-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #888;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+/* Estilos para o texto da mensagem */
+.message p {
+    color: #555;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Estilos do Modal de Cadastro de Evento */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Fundo semi-transparente */
+    padding-top: 60px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.modal-content {
+    background-color: #f2f2f2;
+    /* Cor de fundo rosa claro */
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 16px;
+    color: #2c3e50;
+    display: block;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    /* Cor de fundo verde */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button[type="button"] {
+    background-color: #e04a38;
+    /* Cor de fundo laranja para o botão "Fechar" */
+}
+
+button[type="button"]:hover {
+    background-color: #c0392b;
+}
+
+/* Estilos para o Card de Busca */
+.search-card {
+    position: absolute;
+    top: 100px; /* Distância do topo */
+    left: 2px; /* Distância da lateral esquerda */
+    background-color: #f0f0f0; /* Cinza claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 250px;
+    opacity: 1; /* Inicialmente visível */
+    transition: opacity 0.3s ease; /* Transição suave para aparecer/desaparecer */
+    z-index: 1000; /* Para garantir que o card fique acima dos outros elementos */
+}
+
+/* Ícone da lupa */
+.search-icon img {
+    width: 25px;
+    height: 25px;
+}
+
+/* Input de busca */
+.search-input input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+/* Estilo do botão Enter */
+.search-button {
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #005bb5;
+}
+
+.search-button:focus {
+    outline: none;
+}
+
+/* Estilos para os Atalhos */
+.shortcuts-container {
+    position: absolute;
+    top: 200px; /* Distância do topo em relação ao card de busca */
+    left: 2px; /* Mesma distância da lateral esquerda */
+    padding: 10px;
+    background-color: #f0f0f0; /* Cinza claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    z-index: 999; /* Garantir que fique abaixo do card de busca */
+}
+
+.shortcuts-container h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.shortcut {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.shortcut img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.shortcut span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.shortcut a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.shortcut a:hover {
+    color: #007bff; /* Cor do link ao passar o mouse */
+}
+
+/* Estilos para o Calendário */
+.calendar-container {
+    position: absolute;
+    top: 100px; /* Distância abaixo do card de busca */
+    left: 1240px; /* Distância da lateral esquerda */
+    background-color: #f0f0f0; /* Cinza claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 250px;
+    z-index: 1000;
+}
+
+/* Garantir que o calendário tenha altura e estilo correto */
+#calendar {
+    max-height: 300px;
+    overflow-y: auto;
+}
