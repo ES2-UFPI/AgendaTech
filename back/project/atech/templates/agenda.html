@@ -1,0 +1,703 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Tech</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet" />
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+
+</head>
+
+<script src="{% static 'script.js' %}"></script>
+
+<body>
+
+    <!-- Barra de navegação -->
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="{% static 'images/agenda.png' %}" alt="Agenda" id="agenda-icon" />
+        </div>
+        <div class="navbar-center">
+            <a href="javascript:void(0)" onclick="showEventRegistration()">Cadastrar Evento</a>
+            <a href="javascript:void(0)" onclick="showEvents()">Meus Eventos</a>
+            <a href="javascript:void(0)" onclick="showCertificates()">Meus Certificados</a>
+            <a href="javascript:void(0)" onclick="showProfile()">Perfil</a>
+            <a href="javascript:void(0)" onclick="showSettings()">Configurações</a>
+
+        </div>
+        <div class="navbar-right">
+            <img src="{% static 'images/user-icon.png' %}" alt="Usuário" id="user-icon" onclick="toggleUserCard()" />
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro de Evento -->
+    <div id="event-registration-modal" class="modal" onclick="closeEventRegistrationModal(event)">
+        <div class="modal-content">
+            <h2>Cadastrar Evento</h2>
+
+            <!-- Formulário de Cadastro de Evento -->
+            <form id="event-registration-form">
+                <div class="form-group">
+                    <label for="event-name">Nome do Evento:</label>
+                    <input type="text" id="event-name" name="event-name" required />
+                </div>
+                <div class="form-group">
+                    <label for="event-date">Data do Evento:</label>
+                    <input type="date" id="event-date" name="event-date" required />
+                </div>
+                <div class="form-group">
+                    <label for="event-location">Local do Evento:</label>
+                    <input type="text" id="event-location" name="event-location" required />
+                </div>
+                <div class="form-group">
+                    <label for="event-description">Descrição do Evento:</label>
+                    <textarea id="event-description" name="event-description" required></textarea>
+                </div>
+
+                <!-- Botões -->
+                <button type="submit">Cadastrar Evento</button>
+                <button type="button" onclick="closeEventRegistrationModal(event)">Fechar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Meus Eventos -->
+    <div id="events-modal" class="modal" onclick="closeEventsModal(event)">
+        <div class="modal-content">
+            <h2>Meus Eventos</h2>
+            <!-- Evento 1 -->
+            <div class="event">
+                <h3>Inovação nas universidades: desafios e oportunidades</h3>
+                <p><strong>Data:</strong> 20/11/2024</p>
+                <p><strong>Tipo:</strong> Presencial</p>
+                <p><strong>Local:</strong> Cine Teatro da UFPI</p>
+                <a href="https://www.example.com/event1" target="_blank" class="view-details-button">Ver Detalhes</a>
+            </div>
+
+            <!-- Evento 2 -->
+            <div class="event">
+                <h3>Métricas e indicadores de publicações científicas</h3>
+                <p><strong>Data:</strong> 06/11/2024</p>
+                <p><strong>Tipo:</strong> On-line</p>
+                <p><strong>Local:</strong> YouTube</p>
+                <a href="https://www.example.com/event2" target="_blank" class="view-details-button">Ver Detalhes</a>
+            </div>
+
+            <!-- Evento 3 -->
+            <div class="event">
+                <h3>Palestra: Desenvolvimento de Jogos</h3>
+                <p><strong>Data:</strong> 20/11/2024</p>
+                <p><strong>Tipo:</strong> Presencial</p>
+                <p><strong>Local:</strong> Espaço Integrado II - UFPI</p>
+                <a href="https://www.example.com/event3" target="_blank" class="view-details-button">Ver Detalhes</a>
+            </div>
+
+            <!-- Evento 4 -->
+            <div class="event">
+                <h3>Cibersegurança</h3>
+                <p><strong>Data:</strong> 25/10/2024</p>
+                <p><strong>Tipo:</strong> On-line</p>
+                <p><strong>Local:</strong> YouTube</p>
+                <a href="https://www.example.com/event4" target="_blank" class="view-details-button">Ver Detalhes</a>
+            </div>
+
+            <!-- Evento 5 -->
+            <div class="event">
+                <h3>Ciência na Praça</h3>
+                <p><strong>Data:</strong> 24/10/2024</p>
+                <p><strong>Tipo:</strong> Presencial</p>
+                <p><strong>Local:</strong> Praça Rio Branco</p>
+                <a href="https://www.example.com/event5" target="_blank" class="view-details-button">Ver Detalhes</a>
+            </div>
+
+            <!-- Evento 6 -->
+            <div class="event">
+                <h3>Palestra: Blockchain</h3>
+                <p><strong>Data:</strong> 06/10/2024</p>
+                <p><strong>Tipo:</strong> On-line</p>
+                <p><strong>Local:</strong> Google Meet</p>
+                <a href="https://www.example.com/event6" target="_blank" class="view-details-button">Ver Detalhes</a>
+            </div>
+
+            <button onclick="closeEventsModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Lembrete -->
+    <div class="post-it">
+        <div class="post-it-pin"></div>
+        <div class="post-it-content">
+            <h3>Próximos Eventos</h3>
+            <ul>
+                <li><strong>Inovação nas universidades</strong><br>20/11/2024 - Cine Teatro UFPI</li>
+                <li><strong>Desenvolvimento de Jogos</strong><br>20/11/2024 - Espaço Integrado II</li>
+                <li><strong>Cibersegurança</strong><br>25/11/2024 - YouTube</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal de Perfil -->
+    <div id="profile-modal" class="modal" onclick="closeProfileModal(event)">
+        <div class="modal-content">
+            <h2>Perfil do Aluno</h2>
+
+            <!-- Imagem do Aluno -->
+            <div class="profile-image">
+                <img src="{% static 'images/aluno.jpg' %}" alt="Foto do Aluno" class="profile-img">
+            </div>
+
+            <div class="profile-info">
+                <p><strong>Nome:</strong> Crestfallen Warrior</p>
+                <p><strong>Curso:</strong> Ciência da Computação</p>
+                <p><strong>Matrícula:</strong> 2021001234</p>
+                <p><strong>E-mail:</strong> crestfallen.warrior@ufpi.edu.br</p>
+                <p><strong>Interesses Acadêmicos:</strong> Inteligência Artificial, Aprendizado de Máquina,
+                    Desenvolvimento de Software</p>
+                <p><strong>Atividades Extracurriculares:</strong> Monitor de Algoritmos, Membro do Clube de Programação
+                </p>
+                <p><strong>Link do Lattes:</strong> <a href="https://lattes.cnpq.br/1234567890123456"
+                        target="_blank">Lattes
+                        - Crestfallen Warrior</a></p>
+            </div>
+
+            <button onclick="closeProfileModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Configurações -->
+    <div id="settings-modal" class="modal" onclick="closeSettingsModal(event)">
+        <div class="modal-content">
+            <h2>Configurações</h2>
+
+            <!-- Alteração de Senha -->
+            <div class="setting-item">
+                <h3>Alterar Senha</h3>
+                <label for="current-password">Senha Atual:</label>
+                <input type="password" id="current-password" placeholder="Digite sua senha atual" required>
+
+                <label for="new-password">Nova Senha:</label>
+                <input type="password" id="new-password" placeholder="Digite a nova senha" required>
+
+                <label for="confirm-password">Confirmar Nova Senha:</label>
+                <input type="password" id="confirm-password" placeholder="Confirme a nova senha" required>
+
+                <button type="button" onclick="changePassword()">Alterar Senha</button>
+            </div>
+
+            <!-- Preferências de Notificação -->
+            <div class="setting-item">
+                <h3>Notificações</h3>
+                <label for="email-notifications">Receber notificações por e-mail:</label>
+                <input type="checkbox" id="email-notifications" checked>
+
+                <label for="sms-notifications">Receber notificações por SMS:</label>
+                <input type="checkbox" id="sms-notifications">
+            </div>
+
+            <!-- Tema -->
+            <div class="setting-item">
+                <h3>Preferências de Tema</h3>
+                <label for="theme">Escolha o tema:</label>
+                <select id="theme" onchange="changeTheme()">
+                    <option value="light">Claro</option>
+                    <option value="dark">Escuro</option>
+                </select>
+            </div>
+
+            <!-- Idioma -->
+            <div class="setting-item">
+                <h3>Idioma</h3>
+                <label for="language">Escolha o idioma:</label>
+                <select id="language" onchange="changeLanguage()">
+                    <option value="pt-BR">Português (Brasil)</option>
+                    <option value="en-US">Inglês</option>
+                    <option value="es-ES">Espanhol</option>
+                </select>
+            </div>
+
+            <!-- Configurações de Privacidade -->
+            <div class="setting-item">
+                <h3>Privacidade</h3>
+                <label for="profile-visibility">Tornar perfil visível a outros usuários:</label>
+                <input type="checkbox" id="profile-visibility" checked>
+            </div>
+
+            <button onclick="closeSettingsModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <h2>Entrar</h2>
+            <form id="login-form">
+                <label for="login">Login:</label>
+                <input type="text" id="login" placeholder="Digite seu nome de usuário" required>
+
+                <label for="password">Senha:</label>
+                <input type="password" id="password" placeholder="Digite sua senha" required>
+
+                <button type="submit">Entrar</button>
+            </form>
+            <p>Não tem uma conta? <a href="javascript:void(0)" onclick="showRegisterForm()">Cadastre-se</a></p>
+
+            <div id="register-form" style="display: none;">
+                <h3>Cadastro</h3>
+                <label for="new-login">Novo Login:</label>
+                <input type="text" id="new-login" placeholder="Escolha seu nome de usuário" required>
+
+                <label for="new-password">Nova Senha:</label>
+                <input type="password" id="new-password" placeholder="Escolha sua senha" required>
+
+                <button type="button" onclick="registerUser()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Certificados -->
+    <div id="certificates-modal" class="modal" onclick="closeCertificatesModal(event)">
+        <div class="modal-content">
+            <h2>Seus Certificados</h2>
+            <div class="certificate">
+                <h3><a href="https://www.example.com/certificate1" target="_blank">Certificado - Inovação nas
+                        Universidades</a></h3>
+                <p>Você participou do evento e agora pode baixar seu certificado.</p>
+                <a href="https://www.example.com/certificate1" target="_blank" class="download-button">Baixar
+                    Certificado</a>
+            </div>
+            <div class="certificate">
+                <h3><a href="https://www.example.com/certificate2" target="_blank">Certificado - Métricas e Indicadores
+                        Científicos</a></h3>
+                <p>Baixe seu certificado referente ao evento on-line.</p>
+                <a href="https://www.example.com/certificate2" target="_blank" class="download-button">Baixar
+                    Certificado</a>
+            </div>
+            <div class="certificate">
+                <h3><a href="https://www.example.com/certificate3" target="_blank">Certificado - Desenvolvimento de
+                        Jogos</a></h3>
+                <p>Parabéns por participar! Clique abaixo para baixar o seu certificado.</p>
+                <a href="https://www.example.com/certificate3" target="_blank" class="download-button">Baixar
+                    Certificado</a>
+            </div>
+            <button onclick="closeCertificatesModal()">Fechar</button>
+        </div>
+    </div>
+
+    <div class="search-bar">
+        <!-- Lupa -->
+        <div class="search-icon">
+            <img src="{% static 'images/lupa.png' %}" alt="Lupa">
+        </div>
+        <!-- Busca de Eventos -->
+        <input type="text" id="search-input" placeholder="Buscar eventos" />
+
+        <!-- Botão "Procurar" -->
+        <button id="search-button" class="search-button">Procurar</button>
+    </div>
+
+    <!-- Área de Cidade -->
+    <div class="city-area">
+        <div class="city-header" onclick="toggleCityModal()">
+            <img src="{% static 'images/location-icon.png' %}" alt="Ícone de localização" class="location-icon">
+            <span class="current-city">Teresina</span> <!-- Cidade atual -->
+        </div>
+
+        <!-- Modal de Seleção de Cidade -->
+        <div id="city-modal" class="city-modal hidden">
+            <h3>Selecione sua cidade</h3>
+            <button class="location-button" onclick="useCurrentLocation()">Usar minha localização atual</button>
+            <p class="location-description">Encontre eventos perto de você</p>
+
+            <!-- Lista de Cidades -->
+            <ul class="city-list">
+                <li>Teresina</li>
+                <li>Fortaleza</li>
+                <li>Salvador</li>
+                <li>Recife</li>
+                <li>São Luís</li>
+                <li>Natal</li>
+                <li>Maceió</li>
+                <li>Aracaju</li>
+                <li>João Pessoa</li>
+                <li>São Paulo</li>
+                <li>Rio de Janeiro</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Cards de Eventos -->
+        <div class="card"
+            onclick="openEventDetails('Inovação nas universidades: desafios e oportunidades', '20/11/2024', 'Presencial', 'Cine Teatro da UFPI', 'Grátis', 'Anapatrícia Morales', 'Neste evento, discutiremos as principais inovações que estão sendo implementadas nas universidades, incluindo o uso de tecnologias emergentes e novos modelos de ensino. O palestrante, Dr. João Silva, é um especialista em inovação educacional.')">
+            <img src="{% static 'images/event1.png' %}" alt="Imagem do evento">
+            <h3>Inovação nas universidades: desafios e tecnologia</h3>
+            <p>Data: 20/11/2024</p>
+            <p>Tipo: Presencial</p>
+            <p>Local: <a href="https://maps.google.com" target="_blank">Cine Teatro da UFPI</a></p>
+            <img src="{% static 'images/inscrever.png' %}" alt="Inscrever-se" class="subscribe-button" />
+        </div>
+
+        <div class="card"
+            onclick="openEventDetails('Métricas e indicadores de publicações científicas', '06/11/2024', 'On-line', 'YouTube', 'Grátis', 'Adilson Luiz', 'Aprenda sobre as principais métricas e indicadores usados na análise de publicações científicas, com a Prof. Carla Souza, uma das maiores autoridades no tema.')">
+            <img src="{% static 'images/event2.jpg' %}" alt="Imagem do Evento 2">
+            <h3>Métricas e indicadores de publicações de tecnologia</h3>
+            <p>Data: 06/11/2024</p>
+            <p>Tipo: On-line</p>
+            <p>Local: <a href="https://www.youtube.com/watch?v=ihju8znOUoI" target="_blank">YouTube</a></p>
+            <img src="{% static 'images/inscrever.png' %}" alt="Inscrever-se" class="subscribe-button" />
+        </div>
+
+        <div class="card"
+            onclick="openEventDetails('Palestra: Desenvolvimento de Jogos', '20/11/2024', 'Presencial', 'Espaço Integrado II - UFPI', 'Grátis', 'Raimundo Neto', 'Raimundo Neto, desenvolvedor de jogos há mais de 10 anos, compartilhará suas experiências no desenvolvimento de jogos, abordando tanto aspectos técnicos quanto criativos.')">
+            <img src="{% static 'images/event3.jpg' %}" alt="Imagem do Evento 3">
+            <h3>Palestra: Desenvolvimento de Jogos</h3>
+            <p>Data: 20/11/2024</p>
+            <p>Tipo: Presencial</p>
+            <p>Local: <a href="https://g.co/kgs/6HJpk5y" target="_blank">Espaço Integrado II - UFPI</a></p>
+            <img src="{% static 'images/inscrever.png' %}" alt="Inscrever-se" class="subscribe-button" />
+        </div>
+
+        <div class="card"
+            onclick="openEventDetails('Cibersegurança', '25/10/2024', 'On-line', 'YouTube', 'Grátis', 'Prof. Marcos Oliveira', 'Este evento abordará os fundamentos essenciais da cibersegurança e como proteger seus dados pessoais e corporativos. O Prof. Marcos Oliveira trará sua vasta experiência na área.')">
+            <img src="{% static 'images/event4.jpg' %}" alt="Imagem do Evento 4">
+            <h3>Cibersegurança</h3>
+            <p>Data: 25/10/2024</p>
+            <p>Tipo: On-line</p>
+            <p>Local: <a href="https://www.youtube.com/watch?v=TP1OAI4rpRU" target="_blank">YouTube</a></p>
+            <img src="{% static 'images/inscrever.png' %}" alt="Inscrever-se" class="subscribe-button" />
+        </div>
+
+        <div class="card"
+            onclick="openEventDetails('Ciência na Praça', '24/10/2024', 'Presencial', 'Praça Rio Branco', 'Grátis', 'Equipe Científica UFPI', 'Um evento aberto ao público, trazendo experiências interativas e educativas sobre ciência, promovido pela equipe científica da UFPI. Venha se divertir e aprender mais sobre o mundo da ciência.')">
+            <img src="{% static 'images/event5.jpg' %}" alt="Imagem do Evento 5">
+            <h3>Ciência na Praça</h3>
+            <p>Data: 24/10/2024</p>
+            <p>Tipo: Presencial</p>
+            <p>Local: <a href="https://maps.app.goo.gl/KvAancBeNeJiywiQA" target="_blank">Praça Rio Branco</a></p>
+            <img src="{% static 'images/inscrever.png' %}" alt="Inscrever-se" class="subscribe-button" />
+        </div>
+
+        <div class="card"
+            onclick="openEventDetails('Palestra: Blockchain', '06/10/2024', 'On-line', 'Google Meet', 'Grátis', 'Renato Souza', 'O especialista Renato Souza compartilhará os principais conceitos e aplicações do Blockchain, incluindo as últimas inovações nesta tecnologia disruptiva.')">
+            <img src="{% static 'images/event6.jpg' %}" alt="Imagem do Evento 6">
+            <h3>Palestra: Blockchain</h3>
+            <p>Data: 06/10/2024</p>
+            <p>Tipo: On-line</p>
+            <p>Local: <a href="https://meet.google.com/san-tbrh-cor" target="_blank">Google Meet</a></p>
+            <img src="{% static 'images/inscrever.png' %}" alt="Inscrever-se" class="subscribe-button" />
+        </div>
+    </div>
+
+    <!-- Modal de Detalhes do Evento -->
+    <div id="eventModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <h2 id="modalTitle"></h2>
+            <p><strong>Data:</strong> <span id="modalDate"></span></p>
+            <p><strong>Tipo:</strong> <span id="modalType"></span></p>
+            <p><strong>Local:</strong> <span id="modalLocation"></span></p>
+            <p><strong>Valor:</strong> <span id="modalPrice"></span></p>
+            <p><strong>Palestrante:</strong> <span id="modalSpeaker"></span></p>
+            <p><strong>Descrição:</strong> <span id="modalDescription"></span></p>
+            <button onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <h3>Filtrar por</h3>
+
+        <!-- Filtro por Categoria -->
+        <div class="filter-item" onclick="toggleCategoryModal()">
+            <span>Categoria</span>
+        </div>
+        <div id="category-modal" class="filter-modal hidden">
+            <ul>
+                <li>Games e Geek</li>
+                <li>Cursos</li>
+                <li>Workshops</li>
+                <li>Palestras</li>
+            </ul>
+        </div>
+
+        <!-- Filtro por Data -->
+        <div class="filter-item" onclick="toggleDateModal()">
+            <span>Data</span>
+        </div>
+        <div id="date-modal" class="filter-modal hidden">
+            <ul>
+                <li>Hoje</li>
+                <li>Amanhã</li>
+                <li>Esta semana</li>
+                <li>Próxima semana</li>
+                <li>Este mês</li>
+                <li>Próximo mês</li>
+                <li><input type="date" id="custom-date"></li>
+            </ul>
+        </div>
+
+        <!-- Filtro por Preço -->
+        <div class="filter-item" onclick="togglePriceModal()">
+            <span>Preço</span>
+        </div>
+        <div id="price-modal" class="filter-modal hidden">
+            <ul>
+                <li>Grátis</li>
+                <li>Pago</li>
+                <li>Qualquer preço</li>
+            </ul>
+        </div>
+
+        <!-- Filtro por Tipo de Evento -->
+        <div class="filter-item" onclick="toggleTypeModal()">
+            <span>Tipo de Evento</span>
+        </div>
+        <div id="type-modal" class="filter-modal hidden">
+            <ul>
+                <li>Presencial</li>
+                <li>Online</li>
+                <li>Semi-presencial</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chat em Tempo Real -->
+    <div class="chat-container">
+        <h2>Chat em Tempo Real</h2>
+
+        <!-- Área de mensagens -->
+        <div class="messages-area" id="messages-area">
+            <div class="message user1">
+                <div class="message-header">
+                    <img src="{% static 'images/chosen_undead.jpg' %}" alt="Chosen Undead" class="user-icon" />
+                    <strong>Chosen Undead</strong> <span class="message-time">10:30 AM</span>
+                </div>
+                <p>Olá pessoal! 😊</p>
+            </div>
+            <div class="message user2">
+                <div class="message-header">
+                    <img src="{% static 'images/patches.jpg' %}" alt="Patches" class="user-icon" />
+                    <strong>Patches</strong> <span class="message-time">10:32 AM</span>
+                </div>
+                <p>Oi, Chosen Undead! Como você está? Tem um tesouro esperando no final do evento. Hihi!! 🤔</p>
+            </div>
+            <div class="message user3">
+                <div class="message-header">
+                    <img src="{% static 'images/witch_beatrice.jpg' %}" alt="Witch Beatrice" class="user-icon" />
+                    <strong>Witch Beatrice</strong> <span class="message-time">10:35 AM</span>
+                </div>
+                <p>E aí, galera! Vamos conversar sobre o evento de ontem? 🔥</p>
+            </div>
+            <div class="message user4">
+                <div class="message-header">
+                    <img src="{% static 'images/solaire_of_astora.jpg' %}" alt="Solaire of Astora" class="user-icon" />
+                    <strong>Solaire of Astora</strong> <span class="message-time">10:40 AM</span>
+                </div>
+                <p>Claro! Adorei o evento! Praise The Sun ☀️</p>
+            </div>
+            <div class="message user5">
+                <div class="message-header">
+                    <img src="{% static 'images/aluno.jpg' %}" alt="Crestfallen Warrior" class="user-icon" />
+                    <strong>Crestfallen Warrior</strong> <span class="message-time">10:45 AM</span>
+                </div>
+                <p>Eu também! Mas eu estava com um pouco de preguiça... 🦥</p>
+            </div>
+        </div>
+
+        <!-- Campo para enviar mensagens -->
+        <div class="input-area">
+            <input type="text" id="message-input" placeholder="Digite uma mensagem..." />
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <!-- Contêiner de Comentários e Avaliações -->
+    <div class="chat-container">
+        <h2>Comentários e Avaliações</h2>
+        <div class="chat-box">
+            <!-- Mensagens de exemplo (visíveis no contêiner principal) -->
+            <div class="message">
+                <strong>João Silva:</strong>
+                <p>O evento <a href="https://www.example.com/event1" target="_blank">Inovação nas universidades:
+                        desafios e
+                        oportunidades</a> foi incrível! As palestras foram muito boas e o local estava perfeito!</p>
+                <span class="rating">⭐️⭐️⭐️⭐️⭐️</span>
+            </div>
+            <div class="message">
+                <strong>Ana Costa:</strong>
+                <p>Adorei o evento <a href="https://www.example.com/event2" target="_blank">Métricas e indicadores de
+                        publicações científicas</a>, mas o horário poderia ser melhor. De resto, tudo ótimo!</p>
+                <span class="rating">⭐️⭐️⭐️⭐️</span>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-message" placeholder="Deixe sua opinião...">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+        <button onclick="toggleModal()" class="view-more-button">Ver mais comentários</button>
+    </div>
+
+    <!-- Modal de Comentários -->
+    <div id="comment-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleModal()">&times;</span>
+            <h2>Comentários e Avaliações</h2>
+            <div class="modal-chat-box">
+                <!-- Mensagens completas (visíveis apenas no modal) -->
+                <div class="message">
+                    <strong>João Silva:</strong>
+                    <p>O evento <a href="https://www.example.com/event1" target="_blank">Inovação nas universidades:
+                            desafios e oportunidades</a> foi incrível! As palestras foram muito boas e o local estava
+                        perfeito!</p>
+                    <span class="rating">⭐️⭐️⭐️⭐️⭐️</span>
+                </div>
+                <div class="message">
+                    <strong>Ana Costa:</strong>
+                    <p>Adorei o evento <a href="https://www.example.com/event2" target="_blank">Métricas e indicadores
+                            de
+                            publicações científicas</a>, mas o horário poderia ser melhor. De resto, tudo ótimo!</p>
+                    <span class="rating">⭐️⭐️⭐️⭐️</span>
+                </div>
+                <!-- Novo comentário exclusivo do modal -->
+                <div class="message">
+                    <strong>Carlos Pereira:</strong>
+                    <p>O evento <a href="https://www.example.com/event3" target="_blank">Palestra: Desenvolvimento de
+                            Jogos</a> foi muito inspirador! Recomendo para todos que estão começando na área.</p>
+                    <span class="rating">⭐️⭐️⭐️⭐️⭐️</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção "Seus Certificados" -->
+    <div class="certificates-container">
+        <h2>Seus Certificados</h2>
+        <div class="certificate">
+            <h3><a href="https://www.example.com/certificate1" target="_blank">Certificado - Inovação nas
+                    Universidades</a></h3>
+            <p>Você participou do evento e agora pode baixar seu certificado.</p>
+            <a href="https://www.example.com/certificate1" target="_blank" class="download-button">Baixar
+                Certificado</a>
+        </div>
+        <div class="certificate">
+            <h3><a href="https://www.example.com/certificate2" target="_blank">Certificado - Métricas e Indicadores
+                    Científicos</a></h3>
+            <p>Baixe seu certificado referente ao evento on-line.</p>
+            <a href="https://www.example.com/certificate2" target="_blank" class="download-button">Baixar
+                Certificado</a>
+        </div>
+        <div class="certificate">
+            <h3><a href="https://www.example.com/certificate3" target="_blank">Certificado - Desenvolvimento de
+                    Jogos</a></h3>
+            <p>Parabéns por participar! Clique abaixo para baixar o seu certificado.</p>
+            <a href="https://www.example.com/certificate3" target="_blank" class="download-button">Baixar
+                Certificado</a>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        // Função para abrir o modal com as informações do evento
+        function openEventDetails(title, date, type, location, price, speaker, description) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDate').textContent = date;
+            document.getElementById('modalType').textContent = type;
+            document.getElementById('modalLocation').textContent = location;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('modalSpeaker').textContent = speaker;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('eventModal').style.display = 'block';
+        }
+
+        // Função para fechar o modal
+        function closeModal(event) {
+            if (event.target === document.getElementById('eventModal') || event.target.tagName === 'BUTTON') {
+                document.getElementById('eventModal').style.display = 'none';
+            }
+        }
+
+        // Função para alternar entre mostrar e ocultar o formulário de login
+        function toggleUserCard() {
+            const modal = document.getElementById('login-modal');
+            // Alterna a visibilidade do modal
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Função para exibir o formulário de cadastro
+        function showRegisterForm() {
+            const registerForm = document.getElementById('register-form');
+            registerForm.style.display = "block"; // Mostra o formulário de cadastro
+        }
+
+        // Função fictícia para registrar usuário
+        function registerUser() {
+            const newLogin = document.getElementById('new-login').value;
+            const newPassword = document.getElementById('new-password').value;
+            if (newLogin && newPassword) {
+                alert("Usuário cadastrado com sucesso!");
+                document.getElementById('register-form').style.display = "none"; // Oculta o formulário de cadastro
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        }
+
+        // Fechar o modal quando clicar fora dele
+        window.onclick = function (event) {
+            const modal = document.getElementById('login-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Seção: Encontre Eventos -->
+            <div class="footer-column">
+                <h2 class="footer-title">Encontre Eventos</h2>
+                <ul class="footer-list">
+                    <li>Hoje</li>
+                    <li>Amanhã</li>
+                    <li>Esta semana</li>
+                    <li>Este fim de semana</li>
+                    <li>Próxima semana</li>
+                    <li>Este mês</li>
+                </ul>
+            </div>
+
+            <!-- Seção: Cidades -->
+            <div class="footer-column">
+                <h2 class="footer-title">Cidades</h2>
+                <ul class="footer-list">
+                    <li>Teresina</li>
+                    <li>Fortaleza</li>
+                    <li>Salvador</li>
+                    <li>Recife</li>
+                    <li>João Pessoa</li>
+                </ul>
+            </div>
+
+            <!-- Seção: Categorias -->
+            <div class="footer-column">
+                <h2 class="footer-title">Categorias</h2>
+                <ul class="footer-list">
+                    <li>Tecnologia</li>
+                    <li>Geek</li>
+                    <li>Workshops</li>
+                    <li>Congressos e palestras</li>
+                    <li>Games</li>
+                </ul>
+            </div>
+        </div>
+
+</body>
+
+</html>
