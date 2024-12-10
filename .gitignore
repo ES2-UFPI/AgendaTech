@@ -1,0 +1,19 @@
+# Dependências do Node.js (Frontend)
+node_modules/
+npm-debug.log*
+
+# Ambiente virtual do Python (Backend)
+venv/
+__pycache__/
+*.py[cod]
+
+# Arquivos temporários do sistema
+*.log
+.DS_Store
+Thumbs.db
+
+# Arquivos de build do React
+build/
+
+# Configurações do VS Code (opcional)
+.vscode/
