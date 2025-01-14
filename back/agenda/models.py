@@ -23,3 +23,10 @@ class Evento(models.Model):
 
     def __str__(self):
         return self.nome
+
+class ListaDesejos(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.usuario} - {self.evento}"
