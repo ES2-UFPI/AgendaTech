@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CustomCropper from './CustomCropper';
 import './CreateEvent.css';
 
-import { saveCroppedImage } from './imageUtils'; //Refatoração
+import { saveCroppedImage } from './imageUtils'; //A refatoração está entre as linhas 47 e 59
 
 function CreateEvent() {
   const [formData, setFormData] = useState({
