@@ -1,93 +1,104 @@
 /* Container principal do dropdown */
 .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Estilo do menu dropdown */
+  position: relative;
+  display: inline-block;
+}
+
+/* Estilo do menu dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: auto;
+  right: 0;
+  z-index: 1050;
+  display: none; /* Esconde o menu por padrão */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0;
+  min-width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform-origin: top right;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+}
+
+/* Exibe o menu ao passar o mouse ou clicar */
+.dropdown:hover .dropdown-menu,
+.dropdown.show .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Configuração inicial para animações */
+.dropdown-menu {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Estilo dos itens do menu */
+.dropdown-menu .dropdown-item {
+  display: flex; /* Flexbox para alinhar ícone e texto */
+  align-items: center; /* Alinhamento vertical */
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  gap: 10px; /* Espaço entre ícone e texto */
+}
+
+/* Ícones dentro dos itens */
+.dropdown-menu .dropdown-item img {
+  flex-shrink: 0; /* Evita redimensionamento dos ícones */
+  width: 24px; /* Tamanho padrão */
+  height: 24px;
+}
+
+/* Texto dos itens */
+.dropdown-menu .dropdown-item span {
+  flex-grow: 1; /* Garante que o texto ocupe o espaço restante */
+  text-align: left; /* Alinha o texto à esquerda */
+  white-space: nowrap; /* Impede quebra de linha no texto */
+  line-height: 1.5;
+}
+
+/* Ícones individuais com tamanhos específicos */
+.dropdown-menu .dropdown-item.create-event img {
+  width: 22px;
+  height: 22px;
+}
+
+.dropdown-menu .dropdown-item.wish img {
+  width: 22px;
+  height: 22px;
+}
+
+.dropdown-menu .dropdown-item.profile img {
+  width: 22px;
+  height: 22px;
+}
+
+.dropdown-menu .dropdown-item.help img {
+  width: 22px;
+  height: 22px;
+}
+
+.dropdown-menu .dropdown-item.logout img {
+  width: 22px;
+  height: 22px;
+}
+
+/* Efeito ao passar o mouse sobre os itens */
+.dropdown-menu .dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* Responsividade */
+@media (max-width: 576px) {
   .dropdown-menu {
-    position: absolute;
-    top: 100%; /* Posiciona abaixo do ícone */
-    left: -300%; /* Alinha à esquerda */
-    z-index: 1000;
-    display: none; /* Esconde o menu por padrão */
-    background-color: #fff;/* Container principal do dropdown */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    
-    /* Estilo do menu dropdown */
-    .dropdown-menu {
-      position: absolute;
-      top: 100%; /* Posiciona abaixo do ícone */
-      left: 0; /* Alinha à esquerda */
-      z-index: 1000;
-      display: none; /* Esconde o menu por padrão */
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 0.25rem;
-      padding: 0.5rem 0;
-      min-width: 200px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Exibe o menu ao passar o mouse */
-    .dropdown:hover .dropdown-menu {
-      display: block;
-    }
-    
-    /* Itens do menu */
-    .dropdown-menu .dropdown-item {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      color: #333;
-      text-decoration: none;
-    }
-    
-    /* Efeito ao passar o mouse sobre os itens */
-    .dropdown-menu .dropdown-item:hover {
-      background-color: #f8f9fa;
-    }
-    
-    /* Responsividade */
-    @media (max-width: 576px) {
-      .dropdown-menu {
-        left: auto;
-        right: 0; /* Reposiciona para a direita em telas pequenas */
-      }
-    }
-    
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-    padding: 0.5rem 0;
-    min-width: 200px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    left: auto;
+    right: 0;
   }
-  
-  /* Exibe o menu ao passar o mouse */
-  .dropdown:hover .dropdown-menu {
-    display: block;
-  }
-  
-  /* Itens do menu */
-  .dropdown-menu .dropdown-item {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    color: #333;
-    text-decoration: none;
-  }
-  
-  /* Efeito ao passar o mouse sobre os itens */
-  .dropdown-menu .dropdown-item:hover {
-    background-color: #f8f9fa;
-  }
-  
-  /* Responsividade */
-  @media (max-width: 576px) {
-    .dropdown-menu {
-      left: auto;
-      right: 0; /* Reposiciona para a direita em telas pequenas */
-    }
-  }
-  
+}
