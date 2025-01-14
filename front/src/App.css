@@ -1,63 +1,52 @@
-.about-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.agenda-logo {
-  width: 400px;
-  height: 400px;
-}
-
-.developer-card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-
-.card-img-top {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-.images-section .card {
-  margin-bottom: 2rem;
-  height: 700px; /* Tamanho do card fixado */
+.App {
+  text-align: center;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Garante que a imagem ampliada não saia do card */
+  min-height: 100vh; /* Garante que a altura mínima seja toda a altura da tela */
 }
 
-.images-section .card-img-top {
-  max-width: 100%; /* Garante que a largura nunca ultrapasse o card */
-  max-height: 100%; /* Garante que a altura respeite o card */
-  object-fit: contain; /* Ajusta a imagem proporcionalmente, sem distorcer */
-  flex-grow: 1; /* Faz com que a imagem ocupe o espaço vertical restante */
-  transition: transform 0.3s ease; /* Adiciona uma transição suave */
+.App-header {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-.images-section .card-img-top:hover {
-  transform: scale(1.1); /* Amplia a imagem ao passar o mouse */
+.content {
+  flex: 1; /* Faz com que o conteúdo ocupe o espaço disponível, mantendo o footer no fim */
 }
 
-.images-section .card-body {
+.Footer {
+  width: 100%;
+  background-color: #f8f9fa; /* Cor de fundo suave */
+  padding: 1rem 0;
   text-align: center;
-  background-color: #f8f9fa;
 }
 
-.images-section .card-title {
-  font-size: 1.5rem;
-  margin-top: 1.5rem;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-
-
-/* Aumentando o texto da descrição */
-.about-container .lead {
-  font-size: 1.5rem; /* Tamanho maior para melhorar a leitura */
-  line-height: 1.8; /* Melhor espaçamento entre linhas */
-  color: #333; /* Cor mais escura para maior contraste */
-  margin-top: 1rem;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
