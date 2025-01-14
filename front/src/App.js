@@ -1,27 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './Navbar';
-import Eventos from './Eventos';
-import RegisterUser from './RegisterUser';
-import UserList from './UserList';
-import About from './About';
-import Footer from './Footer';
-import ThemeToggle from './ThemeToggle';
-import CreateEvent from './CreateEvent';
-import DetalhesEvento from './DetalhesEvento';
-import HelpCenter from './HelpCenter';
-import DeadLink from './DeadLink';
-import MinhaConta from './MinhaConta';
-import LoginUser from './LoginUser';
-import Carrossel from './Carousel'; // Importa o componente Carrossel
-import Filter from './Filter';
+
+// Estilos e bibliotecas
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css';
 
+// Componentes locais
+import About from './About';
+import BuscarEvento from './BuscarEvento';
+import Carrossel from './Carousel';
+import CreateEvent from './CreateEvent';
+import DeadLink from './DeadLink';
+import DetalhesEvento from './DetalhesEvento';
+import Eventos from './Eventos';
+import Filter from './Filter';
+import Footer from './Footer';
+import HelpCenter from './HelpCenter';
+import Ingressos from './Tickets';
+import LoginUser from './LoginUser';
+import MinhaConta from './MinhaConta';
+import Navbar from './Navbar';
+import RegisterUser from './RegisterUser';
+import ThemeToggle from './ThemeToggle';
+import UserList from './UserList';
+import Wish from './Wish';
+
+
 function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
-  const [filtro, setFiltro] = useState({}); // Estado para o filtro
+  const [filtro, setFiltro] = useState({});
 
   useEffect(() => {
     const usuario = localStorage.getItem('usuarioLogado');
@@ -31,9 +39,11 @@ function App() {
   }, []);
 
   const handleLogin = (usuario) => {
+    console.log('Dados do usuário no login:', usuario); // Log para verificar os dados recebidos
     setUsuarioLogado(usuario);
     localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
   };
+
 
   const handleLogout = () => {
     setUsuarioLogado(null);
@@ -41,7 +51,7 @@ function App() {
   };
 
   const handleFilterChange = (novoFiltro) => {
-    setFiltro(novoFiltro); // Atualiza o estado do filtro
+    setFiltro(novoFiltro);
   };
 
   return (
@@ -53,19 +63,24 @@ function App() {
           handleLogout={handleLogout}
         />
 
+        {/* Espaçador */}
+        <div style={{ marginBottom: '20px' }}></div>
+
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Carrossel /> {/* Exibindo o carrossel na página inicial */}
-                <Eventos filtro={filtro} /> {/* Exibindo eventos */}
-                <Filter onFilterChange={handleFilterChange} /> {/* Filtros abaixo dos eventos */}
+                <Carrossel />
+                <Eventos filtro={filtro} />
+                <Filter onFilterChange={handleFilterChange} />
               </>
             }
           />
           <Route path="/create-event" element={<CreateEvent />} />
-          <Route path="/eventos/:id" element={<DetalhesEvento />} />
+
+          <Route path="/eventos/:id" element={<DetalhesEvento usuarioLogado={usuarioLogado} />} />
+
           <Route
             path="/register"
             element={<RegisterUser setUsuarioLogado={handleLogin} />}
@@ -75,6 +90,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/help" element={<HelpCenter />} />
           <Route path="/minha-conta" element={<MinhaConta usuario={usuarioLogado} />} />
+          <Route path="/buscar" element={<BuscarEvento />} />
+          <Route path="/tickets/:id" element={<Ingressos />} />
+          <Route path="/wish" element={<Wish usuarioLogado={usuarioLogado} />} />
           <Route path="*" element={<DeadLink />} />
         </Routes>
 
@@ -83,6 +101,7 @@ function App() {
       </div>
     </Router>
   );
+
 }
 
 export default App;
