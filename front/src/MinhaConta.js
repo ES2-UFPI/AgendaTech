@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './MinhaConta.css';
-
+//Atualização da rota Minha Conta no Menu UserDpropdown
 const MinhaConta = ({ usuario, setUsuarioLogado }) => {
   const [formData, setFormData] = useState({
     nome: '',
@@ -12,6 +12,7 @@ const MinhaConta = ({ usuario, setUsuarioLogado }) => {
   // Atualizar o formulário com os dados do usuário ao carregar o componente
   useEffect(() => {
     if (usuario) {
+      console.log('Dados do usuário:', usuario); // Debug para verificar os dados recebidos
       setFormData({
         nome: usuario.nome || '',
         sobrenome: usuario.sobrenome || '',
@@ -55,7 +56,7 @@ const MinhaConta = ({ usuario, setUsuarioLogado }) => {
         setUsuarioLogado(usuarioAtualizado);
         localStorage.setItem('usuarioLogado', JSON.stringify(usuarioAtualizado));
       } else {
-        setMensagem(data.erro);
+        setMensagem(data.erro || 'Erro ao atualizar o perfil.');
       }
     } catch (error) {
       console.error('Erro ao atualizar perfil:', error);
