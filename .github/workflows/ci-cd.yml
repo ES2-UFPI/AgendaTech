@@ -2,52 +2,71 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:      
-      - master
+    branches:
       - dev
-      - ci-cd-#123      
+      - master
+      - dev2
   pull_request:
-    branches:      
-      - master
+    branches:
       - dev
+      - master
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout do repositório
-      - name: Checkout code
-        uses: actions/checkout@v3
+    # Checkout do repositório
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      # Configurar Python para o Backend
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.12
+    # Configurar Python para o Backend
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.12
 
-      # Cache de dependências do Python
-      - name: Cache Python dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+    # Cache de dependências do Python
+    - name: Cache Python dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
 
-      # Instalar dependências do backend
-      - name: Install backend dependencies
-        run: |
-          cd back
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+    - name: Install backend dependencies
+      run: |
+        cd back
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
 
-      # Rodar migrações e testes do backend
-      - name: Run backend migrations and tests
-        run: |
-          cd back
-          source venv/bin/activate
-          python manage.py makemigrations
-          python manage.py migrate
-          python manage.py test
+    - name: Run backend migrations and tests
+      run: |
+        cd back
+        source venv/bin/activate
+        python manage.py makemigrations
+        python manage.py migrate
+        python manage.py test
+
+    # Configurar Node.js para o Frontend
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    # Cache de dependências do Node
+    - name: Cache Node dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install frontend dependencies
+      run: |
+        cd front
+        npm install
+        npm install react-router-dom
