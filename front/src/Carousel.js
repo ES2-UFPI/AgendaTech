@@ -27,7 +27,6 @@ const Carrossel = () => {
     carregarEventos();
   }, []);
   
-
   return (
     <div
       id="myCarousel"
@@ -94,10 +93,7 @@ const Carrossel = () => {
                   <br />
                   <strong>Tipo:</strong> {evento.tipo}
                 </p>
-                <p>
-                  <a className="btn btn-lg btn-primary" href="#">
-                    Saiba mais
-                  </a>
+                <p>                  
                 </p>
               </div>
             </div>
