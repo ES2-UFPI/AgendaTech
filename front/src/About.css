@@ -1,49 +1,69 @@
-.about-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-  }
-  
-  .about-header h1 {
-    color: #0d6efd;
-    font-weight: bold;
-  }
-  
-  .about-header p {
-    max-width: 700px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    color: #6c757d;
-  }
-  
-  .developers-section {
-    margin-top: 40px;
-  }
-  
-  .developer-card {
-    border: none;
-    border-radius: 12px;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .developer-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-title {
-    font-weight: bold;
-    font-size: 1.25rem;
-    color: #343a40;
-  }
-  
-  .btn-primary {
-    background-color: #0d6efd;
-    border: none;
-    transition: background-color 0.3s;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.agenda-logo {
+  width: 400px;
+  height: 400px;
+}
+
+.developer-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.images-section {
+  margin-top: 2rem;
+}
+
+.sprint-title {
+  font-size: 1.5rem; /* Tamanho do título */
+  margin-bottom: 1rem; /* Espaço entre o título e o card */
+  color: #333; /* Cor escura para contraste */
+  font-weight: bold;
+  text-align: center;
+}
+
+.images-section .card {
+  margin-bottom: 2rem;
+  height: 800px; /* Altura atual do card */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Impede que imagens ampliadas saiam do card */
+}
+
+.images-section .card-img-top {
+  width: auto; /* Usa a largura original da imagem */
+  height: auto; /* Usa a altura original da imagem */
+  max-width: 100%; /* Limita a largura para não ultrapassar o card */
+  max-height: 100%; /* Limita a altura para não ultrapassar o card */
+  transition: transform 0.3s ease; /* Adiciona efeito de hover suave */
+}
+
+.images-section .card-img-top:hover {
+  transform: scale(1.1); /* Amplia a imagem ao passar o mouse */
+}
+
+.images-section .card-body {
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: 1rem; /* Espaço interno para o texto */
+  flex-shrink: 0; /* Garante que o título não seja comprimido */
+}
+
+.images-section .card-title {
+  font-size: 1.5rem; /* Tamanho do texto */
+  margin-top: 0.5rem; /* Espaço superior para separação */
+  color: #333; /* Cor escura para contraste */
+}
+
+/* Ajustando o texto da introdução */
+.about-container .lead {
+  font-size: 1.5rem; /* Tamanho maior para leitura */
+  line-height: 1.8; /* Melhor espaçamento entre linhas */
+  color: #333; /* Cor mais escura */
+  margin-top: 1rem;
+}
