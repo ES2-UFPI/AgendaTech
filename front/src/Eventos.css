@@ -17,6 +17,6 @@
   
   .evento-card:hover {
     transform: scale(1.05); /* Aumenta levemente o card */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adiciona um efeito de sombra */
+    box-shadow: 0 4px 15px rgba(25, 1, 1, 0.2); /* Adiciona um efeito de sombra */
   }
   
