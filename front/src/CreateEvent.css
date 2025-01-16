@@ -2,7 +2,7 @@
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
 }
@@ -33,7 +33,7 @@
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 0;
   width: 100%;
 }
 
@@ -57,7 +57,7 @@
   font-size: 1rem;
   padding: 10px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 0;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -82,49 +82,44 @@
   color: #0056b3;
 }
 
-
-
 /* Área do recorte */
-/* Contêiner principal em formato vertical */
 .cropper-container-vertical {
-  max-width: 400px; /* Limita a largura máxima */
-  margin: 0 auto; /* Centraliza na página */
+  max-width: 400px;
+  margin: 0 auto;
   display: flex;
-  flex-direction: column; /* Empilha os elementos verticalmente */
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   background: #f9f9f9;
-  border-radius: 8px;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Área de recorte */
 .cropper-area {
-  width: 100%;
-  height: 300px; /* Altura fixa */
+  width: 400px; /* Largura fixa */
+  height: 200px; /* Altura fixa */
   position: relative;
-  background: #000;
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 0 !important; /* Retângulo garantido */
   overflow: hidden;
+  box-shadow: none !important;
 }
 
 /* Botões de ação */
 .cropper-buttons {
-  width: 100%; /* Botões ocupam toda a largura */
+  width: 100%;
   display: flex;
-  justify-content: space-between; /* Espaça os botões */
+  justify-content: space-between;
   gap: 10px;
 }
 
-/* Botões */
 .cropper-buttons button {
   background-color: #007bff;
   color: #fff;
   font-size: 1rem;
   padding: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 0;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -140,7 +135,7 @@
   }
 
   .cropper-area {
-    height: 250px; /* Reduz a altura em telas menores */
+    width: 300px; /* Largura menor */
+    height: 150px; /* Altura menor */
   }
 }
-
