@@ -4,6 +4,7 @@ import './Navbar.css';
 import agendaIcon from './assets/agenda.png';
 import searchIcon from './assets/lupa.png';
 import UserDropdown from './UserDropdown';
+import ChatButton from './ChatButton'; 
 
 function Navbar({ usuarioLogado, setUsuarioLogado, handleLogout }) {
   const [termoBusca, setTermoBusca] = useState('');
@@ -81,10 +82,13 @@ function Navbar({ usuarioLogado, setUsuarioLogado, handleLogout }) {
             </button>
           </>
         ) : (
-          <UserDropdown
-            usuarioLogado={usuarioLogado}
-            handleLogout={handleLogout}
-          />
+          <>
+            <ChatButton usuarioLogado={usuarioLogado} />
+            <UserDropdown
+              usuarioLogado={usuarioLogado}
+              handleLogout={handleLogout}
+            />
+          </>
         )}
       </div>
     </div>
