@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import cropImageForRect from './cropImageHelperRect'; // Usando a função genérica para recorte retangular
+import cropImageForRect from './cropImageHelperRect';
 import './RegisterUser.css';
+
+// Replace Magic Literal: Defini constantes para valores literais usados no código.
+const API_ENDPOINT = 'http://localhost:8000/api/cadastrar_usuario/';
+const IMAGE_TYPE = 'image/jpeg';
+const IMAGE_QUALITY = 0.9;
+const CROPPED_IMAGE_NAME = 'profile-image-cropped.jpg';
 
 const RegisterUser = ({ setUsuarioLogado }) => {
   const [formData, setFormData] = useState({
@@ -25,13 +31,11 @@ const RegisterUser = ({ setUsuarioLogado }) => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageSrc(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => setImageSrc(reader.result);
+    reader.readAsDataURL(file);
   };
 
   const handleCropComplete = (croppedArea, croppedAreaPixels) => {
@@ -40,10 +44,8 @@ const RegisterUser = ({ setUsuarioLogado }) => {
 
   const handleCropSave = async () => {
     try {
-      // Usa a função de recorte para obter a imagem quadrada
       const croppedImageBlob = await cropImageForRect(imageSrc, croppedAreaPixels);
 
-      // Criar um canvas para redimensionar e mascarar como círculo
       const canvas = document.createElement('canvas');
       const size = Math.min(croppedAreaPixels.width, croppedAreaPixels.height);
       canvas.width = size;
@@ -56,21 +58,17 @@ const RegisterUser = ({ setUsuarioLogado }) => {
         img.src = URL.createObjectURL(croppedImageBlob);
       });
 
-      // Criação da máscara circular
       ctx.beginPath();
       ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2, true);
       ctx.clip();
 
-      // Desenhar a imagem recortada dentro do círculo
       ctx.drawImage(image, 0, 0, size, size);
 
-      // Converter o canvas para Blob
       const circularBlob = await new Promise((resolve) =>
-        canvas.toBlob(resolve, 'image/jpeg', 0.9)
+        canvas.toBlob(resolve, IMAGE_TYPE, IMAGE_QUALITY)
       );
 
-      // Criar o arquivo final
-      const file = new File([circularBlob], 'profile-image-cropped.jpg', { type: 'image/jpeg' });
+      const file = new File([circularBlob], CROPPED_IMAGE_NAME, { type: IMAGE_TYPE });
 
       setFormData({ ...formData, imagem: file });
       setCroppedFileName(file.name);
@@ -96,7 +94,7 @@ const RegisterUser = ({ setUsuarioLogado }) => {
     });
 
     try {
-      const response = await fetch('http://localhost:8000/api/cadastrar_usuario/', {
+      const response = await fetch(API_ENDPOINT, {
         method: 'POST',
         body: formDataToSubmit,
       });
