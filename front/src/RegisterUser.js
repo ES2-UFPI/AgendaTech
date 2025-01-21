@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import getCroppedImgCircle from './cropImageHelperCircle';
+import cropImageForRect from './cropImageHelperRect';
 import './RegisterUser.css';
+
+// Replace Magic Literal: Defini constantes para valores literais usados no código.
+const API_ENDPOINT = 'http://localhost:8000/api/cadastrar_usuario/';
+const IMAGE_TYPE = 'image/jpeg';
+const IMAGE_QUALITY = 0.9;
+const CROPPED_IMAGE_NAME = 'profile-image-cropped.jpg';
 
 const RegisterUser = ({ setUsuarioLogado }) => {
   const [formData, setFormData] = useState({
@@ -25,13 +31,11 @@ const RegisterUser = ({ setUsuarioLogado }) => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageSrc(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => setImageSrc(reader.result);
+    reader.readAsDataURL(file);
   };
 
   const handleCropComplete = (croppedArea, croppedAreaPixels) => {
@@ -40,35 +44,32 @@ const RegisterUser = ({ setUsuarioLogado }) => {
 
   const handleCropSave = async () => {
     try {
-      // Obter o blob da imagem recortada
-      const croppedImageBlob = await getCroppedImgCircle(imageSrc, croppedAreaPixels);
-  
-      // Criar um canvas para redimensionar a imagem
+      const croppedImageBlob = await cropImageForRect(imageSrc, croppedAreaPixels);
+
       const canvas = document.createElement('canvas');
-      const fixedWidth = 300; // Largura fixa em pixels
-      const fixedHeight = 300; // Altura fixa em pixels
-      canvas.width = fixedWidth;
-      canvas.height = fixedHeight;
-  
+      const size = Math.min(croppedAreaPixels.width, croppedAreaPixels.height);
+      canvas.width = size;
+      canvas.height = size;
+
       const ctx = canvas.getContext('2d');
       const image = await new Promise((resolve) => {
         const img = new Image();
         img.onload = () => resolve(img);
         img.src = URL.createObjectURL(croppedImageBlob);
       });
-  
-      // Redimensionar a imagem para o tamanho fixo
-      ctx.drawImage(image, 0, 0, fixedWidth, fixedHeight);
-  
-      // Converter o canvas para Blob
-      const resizedBlob = await new Promise((resolve) =>
-        canvas.toBlob(resolve, 'image/jpeg', 0.9) // Qualidade 90%
+
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2, true);
+      ctx.clip();
+
+      ctx.drawImage(image, 0, 0, size, size);
+
+      const circularBlob = await new Promise((resolve) =>
+        canvas.toBlob(resolve, IMAGE_TYPE, IMAGE_QUALITY)
       );
-  
-      // Criar um arquivo a partir do blob redimensionado
-      const file = new File([resizedBlob], 'profile-image-cropped.jpg', { type: 'image/jpeg' });
-  
-      // Atualizar o estado com o arquivo redimensionado
+
+      const file = new File([circularBlob], CROPPED_IMAGE_NAME, { type: IMAGE_TYPE });
+
       setFormData({ ...formData, imagem: file });
       setCroppedFileName(file.name);
       setImageSrc(null);
@@ -77,7 +78,6 @@ const RegisterUser = ({ setUsuarioLogado }) => {
       alert('Erro ao salvar o recorte da imagem.');
     }
   };
-  
 
   const handleCropCancel = () => {
     setImageSrc(null);
@@ -85,26 +85,26 @@ const RegisterUser = ({ setUsuarioLogado }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const formDataToSubmit = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       if (value !== null) {
         formDataToSubmit.append(key, value);
       }
     });
-  
+
     try {
-      const response = await fetch('http://localhost:8000/api/cadastrar_usuario/', {
+      const response = await fetch(API_ENDPOINT, {
         method: 'POST',
         body: formDataToSubmit,
       });
-  
+
       if (response.ok) {
         const usuario = await response.json();
-        setUsuarioLogado(usuario); // Atualiza o estado global
-        localStorage.setItem('usuarioLogado', JSON.stringify(usuario)); // Armazena no localStorage
+        setUsuarioLogado(usuario);
+        localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
         alert('Cadastro realizado com sucesso! Você foi logado automaticamente.');
-        window.location.href = '/'; // Redireciona para a página inicial
+        window.location.href = '/';
       } else {
         const errorData = await response.json();
         setError(errorData.erro || 'Erro ao cadastrar usuário.');
@@ -125,7 +125,7 @@ const RegisterUser = ({ setUsuarioLogado }) => {
               image={imageSrc}
               crop={crop}
               zoom={zoom}
-              aspect={1}
+              aspect={1} // Define área de recorte quadrada
               onCropChange={setCrop}
               onZoomChange={setZoom}
               onCropComplete={handleCropComplete}

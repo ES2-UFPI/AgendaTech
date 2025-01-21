@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './UserList.css'; // Certifique-se de importar o arquivo CSS
 
 function UserList() {
   const [usuarios, setUsuarios] = useState([]);
@@ -18,13 +19,21 @@ function UserList() {
   return (
     <div className="user-list">
       <h2>Lista de Usuários</h2>
-      <ul>
+      <div className="user-grid">
         {usuarios.map((usuario) => (
-          <li key={usuario.id}>
-            {usuario.nome} {usuario.sobrenome}
-          </li>
+          <div className="user-card" key={usuario.id}>
+            <img
+              src={`http://127.0.0.1:8000${usuario.imagem}`} // URL completa da imagem
+              alt={`${usuario.nome} ${usuario.sobrenome}`} // Texto alternativo
+              className="user-image"
+            />
+            <div className="user-details">
+              <p><strong>{usuario.nome} {usuario.sobrenome}</strong></p>
+              <p className="username">@{usuario.username}</p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

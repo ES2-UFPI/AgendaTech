@@ -1,0 +1,131 @@
+/* Estilo para o componente Tickets */
+.tickets-container {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.tickets-container h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #444;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.tickets-container .container {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.tickets-container h2 {
+    color: #555;
+    font-size: 20px;
+    text-align: center;
+    background: #eef6ff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tickets-container p {
+    line-height: 1.6;
+}
+
+.tickets-container form {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tickets-container label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tickets-container input[type="text"],
+.tickets-container input[type="email"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.tickets-container button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745; /* Cor alterada para verde */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    margin: 10px 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.tickets-container button:hover {
+    background-color: #218838; /* Cor alterada para um verde mais escuro */
+}
+
+.tickets-container .ticket-details {
+    margin: 20px 0;
+    padding: 15px;
+    background: #eef6ff;
+    border-left: 4px solid #1e90ff;
+    border-radius: 8px;
+}
+
+.tickets-container .ticket-details h2 {
+    margin-top: 0;
+}
+
+.tickets-container .ticket-details p {
+    margin: 5px 0;
+}
+
+.tickets-container .chave-pix {
+    font-weight: bold;
+    color: #d9534f;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.tickets-container .generate-button {
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    margin: 20px auto;
+    background-color: #28a745; /* Cor alterada para verde */
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.tickets-container .generate-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
